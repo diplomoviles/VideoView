@@ -15,7 +15,10 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         //Cargando un archivo local en almacenamiento interno
-        binding.vvVideo.setVideoPath("android.resource://${packageName}/${R.raw.maverick}")
+        //binding.vvVideo.setVideoPath("android.resource://${packageName}/${R.raw.maverick}")
+
+        //Cargando un video desde una URL:
+        binding.vvVideo.setVideoPath("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4")
 
         val mc = MediaController(this)
         mc.setAnchorView(binding.vvVideo) //anclamos el videoview al mediacontroller
