@@ -8,6 +8,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.amaurypm.videoview.databinding.ActivityMainBinding
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 
 class MainActivity : AppCompatActivity() {
 
@@ -32,14 +34,26 @@ class MainActivity : AppCompatActivity() {
         //binding.vvVideo.start()
 
         //Cargamos un archivo en la red
-        binding.vvVideo.setVideoPath("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4")
+        /*binding.vvVideo.setVideoPath("https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/WhatCarCanYouGetForAGrand.mp4")
 
         //Estableciendo controles para el video.
         val mediaController = MediaController(this)
         mediaController.setAnchorView(binding.vvVideo)
         binding.vvVideo.setMediaController(mediaController)
 
-        binding.vvVideo.start()
+        binding.vvVideo.start()*/
 
+        binding.ytpvVideo.addYouTubePlayerListener(object: AbstractYouTubePlayerListener(){
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                youTubePlayer.loadVideo("8VGgHcOO8TM", 0f)
+            }
+        })
+
+        lifecycle.addObserver(binding.ytpvVideo)
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        binding.ytpvVideo.release()
     }
 }
